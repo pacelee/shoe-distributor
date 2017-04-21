@@ -1,0 +1,46 @@
+<div class="container-fluid">
+  <div class="box col-md-6">
+    <h1>Shoes!</h1>
+    <% @shoes.each do |shoe| %>
+        <ul><a href='/shoes/<%=shoe.id%>'><p><%=shoe.brand%></p></a>
+        <form action="/shoe_delete" method="post">
+          <input name="_method" type="hidden" value="delete">
+          <input id="shoe_id" name="shoe_id" type="hidden" value="<%= shoe.id() %>">
+          <button class="btn btn-danger" type="submit">Delete</button>
+        </form>
+        </ul>
+    <% end %>
+  </div>
+  <div class="box col-md-6">
+    <h1>Stores!</h1>
+    <% @stores.each do |store| %>
+        <ul><a href="/stores/<%= store.id()%>"><p><%=store.name%> | <%=store.location%></p></a>
+        <form action="/store_delete" method="post">
+          <input name="_method" type="hidden" value="delete">
+          <input id="store_id" name="store_id" type="hidden" value="<%= store.id() %>">
+          <button class="btn btn-danger" type="submit">Delete</button>
+        </form>
+        </ul>
+    <% end %>
+  </div>
+</div>
+
+<div class="container-fluid">
+  <div class="box col-md-6">
+    <form action="/shoes" method="post">
+      <label for="name"><p>Name of Shoe Brand:</p></label>
+      <input class="form-control" id="name" name="name" type="text">
+      <br><button class="btn btn-primary" type="submit"><p>Add Brand</p></button>
+    </form>
+  </div>
+
+  <div class="box col-md-6">
+    <form action="/stores" method="post">
+      <label for="name"><p>Name of Store:</p></label>
+      <input class="form-control" id="name" name="name" type="text">
+      <label for="location"><p>Location:</p></label>
+      <input class="form-control" id="location" name="location" type="text">
+      <br><button class="btn btn-primary" type="submit"><p>Add Store</p></button>
+    </form>
+  </div>
+</div>

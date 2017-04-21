@@ -1,0 +1,23 @@
+<div class="box container">
+  <h1><%= @shoe.brand() %></h1>
+</div>
+
+<div class="box container">
+  <h3>Stores That Carry <%= @shoe.brand() %></h3>
+  <% @shoe.stores.each() do |store| %>
+    <a href="/stores/<%=store.id%>"><ul><p><%=store.name%> | <%=store.location%></ul></a>
+  <% end %>
+</div>
+
+<div class="box container">
+  <h3>Add an Existing Store to <%=@shoe.brand()%></h3>
+  <form action="/store_add" method="post">
+    <select id="store_id" name="store_id" type="text">
+      <% @stores.each do |store| %>
+        <option value="<%= store.id() %>"><p><%= store.name() %> </option>
+      <% end %>
+    </select>
+    <input type="hidden" name="self_id" id="self_id" value="<%=@shoe.id%>">
+    <button class="btn btn-primary" action="submit"></p>Submit</p>
+  </form>
+</div>

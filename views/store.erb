@@ -1,0 +1,33 @@
+<div class="box container">
+<h1><%= @store.name() %></h1>
+<p>Born and Bred in <%=@store.location() %></p>
+<h3>Update Name and Location</h3>
+  <form action="/store_update" method="post">
+    <input name="_method" value="patch" type="hidden">
+    <input id="self_id" name="self_id" type="hidden" value="<%=@store.id%>">
+    <label for="name"><p>Name</p></label>
+    <input id="name" name="name" type="text">
+    <label for="location"><p>Location</p></label>
+    <input id="location" name="location" type="text">
+    <button class="btn btn-primary" type="submit"><p>Update</p></button>
+</div>
+
+<div class="box container">
+  <h3>Shoe Brands We Carry:</h3>
+    <% @store.shoes().each do |shoe| %>
+      <a href="/shoes/<%=shoe.id%>"><ul><p><%= shoe.brand %></p></ul></a>
+    <% end %>
+</div>
+
+<div class="box container">
+  <h3>Add an Existing Shoe Brand to <%=@store.name()%></h3>
+    <form action='/shoe_add' method='post'>
+      <select id="shoe_id" name="shoe_id" type="text">
+        <% @shoes.each do |shoe| %>
+          <option value="<%= shoe.id() %>"><p><%= shoe.brand() %> </option>
+        <% end %>
+      </select>
+      <input type="hidden" name="self_id" id="self_id" value="<%=@store.id%>">
+      <button class="btn btn-primary" action="submit"><p>Submit</p></button>
+    </form>
+</div>
